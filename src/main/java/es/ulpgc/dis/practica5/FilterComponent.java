@@ -1,15 +1,17 @@
+package es.ulpgc.dis.practica5;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package es.ulpgc.dis.pruebaclasep5;
+
 
 import java.awt.image.BufferedImage;
 import java.awt.image.ColorModel;
 import java.awt.image.WritableRaster;
 
-public class NewClass {
+public class FilterComponent {
     private static BufferedImage clonarImagen(BufferedImage bi) {
         ColorModel cm = bi.getColorModel();
         boolean isAlphaPremultiplied = cm.isAlphaPremultiplied();

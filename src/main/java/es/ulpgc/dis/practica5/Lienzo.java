@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package es.ulpgc.dis.pruebaclasep5;
+package es.ulpgc.dis.practica5;
 
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -14,6 +14,7 @@ import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -33,7 +34,7 @@ public class Lienzo extends JPanel {
 
     public Lienzo() {
         try {
-            imagen = ImageIO.read(new URL("https://dam.vanidades.com/wp-content/uploads/2020/04/%C2%A1Como-si-necesit%C3%A1ramos-m%C3%A1s-razones-para-amar-a-los-perritos-Seg%C3%BAn-investigadores-el-mejor-amigo-del-hombre-podr%C3%ADa-ayudar-a-detectar-el-coronavirus.-770x513.jpg"));
+            imagen = ImageIO.read(new URL("https://i.pinimg.com/736x/53/44/cf/5344cf95295d7099c60ff682ecffb59e.jpg"));
             this.setPreferredSize(new Dimension(imagen.getWidth(), imagen.getHeight()));
         } catch (MalformedURLException ex) {
             Logger.getLogger(Lienzo.class.getName()).log(Level.SEVERE, null, ex);
@@ -54,7 +55,7 @@ public class Lienzo extends JPanel {
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.drawImage(NewClass.seleccionarComponentes(imagen, red, green, blue), 0, 0, null);
+        g.drawImage(FilterComponent.seleccionarComponentes(imagen, red, green, blue), 0, 0, null);
         g.drawImage(imageLogo, x, y, null);
     }
     
@@ -77,6 +78,14 @@ public class Lienzo extends JPanel {
     public static int vertical(){
         return imageLogo.getHeight();
     }
+    
+    public static int verticalImagen(){
+        return imagen.getHeight();
+    }
+    
+    public static int horizontalImagen(){
+        return imagen.getWidth();
+    }
 
     public void changeCoordinates(int x2, int y2) {
         x = x2;
@@ -85,14 +94,26 @@ public class Lienzo extends JPanel {
     
     
     public void setUrlImage(String name){
+        BufferedImage temp = null;
         try {
-            imagen = ImageIO.read(new URL(
+            temp = ImageIO.read(new URL(
                     name));
-            this.setPreferredSize(new Dimension(imagen.getWidth(), imagen.getHeight()));
         } catch (MalformedURLException ex) {
             Logger.getLogger(Lienzo.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "not valid URL", "Value not valid",
+                    JOptionPane.ERROR_MESSAGE);
         } catch (IOException ex) {
             Logger.getLogger(Lienzo.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "not valid URL", "Value not valid",
+                    JOptionPane.ERROR_MESSAGE);
+        }finally{
+            if(temp.getWidth() <= 1024 && temp.getHeight() <= 768){
+                imagen = temp;
+                this.setPreferredSize(new Dimension(imagen.getWidth(), imagen.getHeight()));
+            }else{
+                JOptionPane.showMessageDialog(null, "Image has to be 1024x768 maximum", "Not valid image",
+                    JOptionPane.ERROR_MESSAGE);
+            }
         }
     }
 }

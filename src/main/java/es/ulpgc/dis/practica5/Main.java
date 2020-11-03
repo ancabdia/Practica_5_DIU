@@ -3,9 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package es.ulpgc.dis.pruebaclasep5;
+package es.ulpgc.dis.practica5;
+
 
 import java.awt.Dimension;
+import javax.swing.JOptionPane;
 
 
 /**
@@ -20,7 +22,7 @@ public class Main extends javax.swing.JFrame {
     public Main() {
         initComponents();
         
-        lienzo1.changeCoordinates(lienzo1.getWidth() - Lienzo.horizontal(), 0);
+        lienzo1.changeCoordinates(Lienzo.horizontalImagen() - Lienzo.horizontal(), 0);
         lienzo1.repaint();
     }
 
@@ -49,9 +51,12 @@ public class Main extends javax.swing.JFrame {
         imagenLabel = new javax.swing.JLabel();
         urlTextfield = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
-        lienzo1 = new es.ulpgc.dis.pruebaclasep5.Lienzo();
+        lienzo1 = new es.ulpgc.dis.practica5.Lienzo();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Image Loader");
+
+        checkBoxPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Color Filter"));
 
         allCheckBox.setSelected(true);
         allCheckBox.setText("All Colors");
@@ -90,6 +95,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
+        errorLabel.setForeground(new java.awt.Color(255, 0, 51));
         errorLabel.setText("At least one color ");
         errorLabel.setEnabled(true);
         errorLabel.setVisible(false);
@@ -125,6 +131,8 @@ public class Main extends javax.swing.JFrame {
                 .addComponent(errorLabel)
                 .addContainerGap())
         );
+
+        radioButtonPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Logo Position"));
 
         Corners.add(upperLeft);
         upperLeft.setText("upperLeft");
@@ -183,7 +191,9 @@ public class Main extends javax.swing.JFrame {
                 .addComponent(downRight))
         );
 
-        imagenLabel.setText("Logo image URL:");
+        urlPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("URL loader"));
+
+        imagenLabel.setText("Image URL:");
 
         urlTextfield.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -231,11 +241,11 @@ public class Main extends javax.swing.JFrame {
         lienzo1.setLayout(lienzo1Layout);
         lienzo1Layout.setHorizontalGroup(
             lienzo1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         lienzo1Layout.setVerticalGroup(
             lienzo1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+            .addGap(0, 513, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -253,7 +263,7 @@ public class Main extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(urlPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lienzo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lienzo1, javax.swing.GroupLayout.DEFAULT_SIZE, 673, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -268,8 +278,8 @@ public class Main extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(urlPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lienzo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(16, Short.MAX_VALUE))
+                        .addComponent(lienzo1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -277,7 +287,7 @@ public class Main extends javax.swing.JFrame {
 
     private void allCheckBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_allCheckBoxItemStateChanged
         // TODO add your handling code here:
-
+        errorLabel.setVisible(false);
     }//GEN-LAST:event_allCheckBoxItemStateChanged
 
     private void redCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_redCheckBoxActionPerformed
@@ -348,25 +358,29 @@ public class Main extends javax.swing.JFrame {
 
     private void upperLeftActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_upperLeftActionPerformed
         // TODO add your handling code here:
+        lienzo1.setPreferredSize(new Dimension(Lienzo.horizontalImagen(), Lienzo.verticalImagen()));
         lienzo1.changeCoordinates(0, 0);
         lienzo1.repaint();
     }//GEN-LAST:event_upperLeftActionPerformed
 
     private void upperRightActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_upperRightActionPerformed
         // TODO add your handling code here:
-        lienzo1.changeCoordinates(lienzo1.getWidth() - Lienzo.horizontal(), 0);
+        lienzo1.setPreferredSize(new Dimension(Lienzo.horizontalImagen(), Lienzo.verticalImagen()));
+        lienzo1.changeCoordinates(Lienzo.horizontalImagen() - Lienzo.horizontal(), 0);
         lienzo1.repaint();
     }//GEN-LAST:event_upperRightActionPerformed
 
     private void downLeftActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_downLeftActionPerformed
         // TODO add your handling code here:
-        lienzo1.changeCoordinates(0, lienzo1.getHeight() - Lienzo.vertical());
+        lienzo1.setPreferredSize(new Dimension(Lienzo.horizontalImagen(), Lienzo.verticalImagen()));
+        lienzo1.changeCoordinates(0, Lienzo.verticalImagen() - Lienzo.vertical());
         lienzo1.repaint();
     }//GEN-LAST:event_downLeftActionPerformed
 
     private void downRightActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_downRightActionPerformed
         // TODO add your handling code here:
-        lienzo1.changeCoordinates(lienzo1.getWidth() - Lienzo.horizontal(), lienzo1.getHeight() - Lienzo.vertical());
+        lienzo1.setPreferredSize(new Dimension(Lienzo.horizontalImagen(), Lienzo.verticalImagen()));
+        lienzo1.changeCoordinates(Lienzo.horizontalImagen() - Lienzo.horizontal(), Lienzo.verticalImagen() - Lienzo.vertical());
         lienzo1.repaint();
     }//GEN-LAST:event_downRightActionPerformed
 
@@ -378,7 +392,8 @@ public class Main extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         if(urlTextfield.getText().isEmpty()){
-            //ERROR
+            JOptionPane.showMessageDialog(null, "not valid URL", "Value not valid",
+                    JOptionPane.ERROR_MESSAGE);
         }else{
             lienzo1.setUrlImage(urlTextfield.getText());
             lienzo1.repaint();
@@ -437,7 +452,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JCheckBox greenCheckBox;
     private javax.swing.JLabel imagenLabel;
     private javax.swing.JButton jButton1;
-    private es.ulpgc.dis.pruebaclasep5.Lienzo lienzo1;
+    private es.ulpgc.dis.practica5.Lienzo lienzo1;
     private javax.swing.JPanel radioButtonPanel;
     private javax.swing.JCheckBox redCheckBox;
     private javax.swing.JRadioButton upperLeft;
